@@ -1,0 +1,21 @@
+<template name="details">
+    <img src={{commerce.image}} alt="image" style="width:200px;">
+    <h3>{{commerce.nom}}</h3>
+    <p>{{commerce.adresse}}</p>
+    <h3>Menu</h3>
+    <ul>
+      {{#each menus}}
+
+      <li>
+        <h3>{{nom}}</h3>
+        <p>{{description}}</p>
+        <p>{{prix}} €</p>
+
+        <a href="{{pathFor route='commander'}}"> <input type="button" value="Commander"/></a>
+
+        <p>Menus restant : {{restant}}</p>
+      </li>
+
+      {{/each}}
+    </ul>
+</template>
