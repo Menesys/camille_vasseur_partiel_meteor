@@ -1,21 +1,58 @@
 <template name="details">
-    <img src={{commerce.image}} alt="image" style="width:200px;">
-    <h3>{{commerce.nom}}</h3>
-    <p>{{commerce.adresse}}</p>
-    <h3>Menu</h3>
-    <ul>
+
+    <div class="commerce panel panel-primary">
+      <div class="panel-heading">
+        <h3>{{commerce.nom}}</h3>
+      </div>
+      <div class="panel-body">
+        <div class="row">
+          <div class="col-md-3">
+            <img src={{commerce.image}} alt="image" class="img-rounded" width="200px" heigth="171px">
+          </div>
+          <div class="col-md-9">
+            <p><strong>Adresse : </strong>{{commerce.adresse}}</p>
+            <p><strong>Téléphone : </strong>{{commerce.telephone}}</p>
+            <p><strong>Horaires : </strong>{{commerce.horaire}}</p>
+          </div>
+        </div>
+    </div>
+  </div>
+    <h3>Liste des menus : </h3>
+
+    <ul class="list-group">
+
       {{#each menus}}
 
-      <li>
-        <h3>{{nom}}</h3>
-        <p>{{description}}</p>
-        <p>{{prix}} €</p>
+      <li class="list-group-item">
+        <h3>{{nom}}    <span class="label label-primary">{{prix}} €</span> </h3>
 
-        <a href="{{pathFor route='commander'}}"> <input type="button" value="Commander"/></a>
+
+        <img src={{image}} alt="menu" class="img-rounded" style="width:150px;">
+
+        <p><i>{{description}}</i></p>
+
+        <a href="{{pathFor route='commander'}}"> <button type="button" disabled name="commander" class="btn btn-success">Commander</button></a>
+        <span class="label label-warning" name="connectezVous">Veuillez vous connecter pour commander</span>
 
         <p>Menus restant : {{restant}}</p>
       </li>
 
       {{/each}}
     </ul>
+
+    <script>
+    if ('{{user._id}}' !== '') {
+      console.log('{{user._id}}');
+      var foo = document.getElementsByName("commander");
+      var bar = document.getElementsByName("connectezVous");
+      for (var i = 0; i < foo.length; i++) {
+        foo[i].disabled = false;
+        bar[i].innerHTML = "";
+      }
+
+
+
+    }
+    console.log('{{user._id}}');
+    </script>
 </template>
